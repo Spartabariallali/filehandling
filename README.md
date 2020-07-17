@@ -1,21 +1,17 @@
 ## Python Database Connections
 - create a python file that contains parameters which enable us to connect to the database
-
 ```python
 server = 'databases.spartaglobal.academy'
 database = 'Northwind'
 username = 'SA'
-password = 'Passw0rd2018'
-  
+password = 'Passw0rd2018' 
 ```
 #### PYODBC module
-
 Pyodbc is a python library which helps connect to a database
 -  in order to establish a connection between SQL python we need to import the pyodbc module and establish the parameters in the connection string
 - 
 ```python
-import pyodbc
-  
+import pyodbc  
 ```
 ## ODBC
 - open database ___ which is for opening microsoft applications
@@ -43,10 +39,8 @@ class ConnectingToDataBase:
         connection_string = ('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+password)
         connection_key = pyodbc.connect(connection_string, autocommit=True)
         print("connected {}".format(database))
-        return connection_key
-  
+        return connection_key 
 ```
-
 - as a second iteration, I created a second method that enables me to read product data and return the table in a data frame 
 
 ```python
@@ -76,21 +70,94 @@ class ConnectingToDataBase:
         df["supplierid"] = supplierid
         df["price"] = price
 
-        print(df.head(len(product_id)))
-  
+        print(df.head(len(product_id))) 
 ```
+#### Homework
+
+- in terms of the homework - the objective was to write text to a file and then read from this file to write to another file, simultaneously 
+
+- in the code below, I constructed an OOP program that takes an input from a user and the in the following methods reads the message. 
+
+```python
+class fileHandling:
+    def __init__(self, text_storage=None):
+        self.text_storage = text_storage
+
+    def user_input(self):
+        try:
+            name = input("Enter your name: \n")
+            if len(name) == 0:
+                raise Exception
+        except Exception:
+            print("please enter a valid name(at least one letter)")
+            self.user_input()
+        else:
+            print("thank you, your name has been registed {}".format(name))
+        
+        def readtext(self):
+
+        try:
+            user_input = input("please leave a message: \n")
+            if len(user_input) == 0:
+                raise Exception
+        except Exception:
+            print("please enter a message --> at least one character")
+            self.readtext
+        else:
+            with open("message.txt","w+") as file:
+                file.write(user_input)
+                file.seek(0)
+                self.text_storage = file.read()
+            with open("message2.txt","w") as file:
+                file.write(self.text_storage)
+                return self.text_storage
+
+```
+- the third method in the class allows us to retrieve a predefined image file and then read that image.
+
+```python
+    def read_product_data(self):
+
+        print("reading data")
+        connection_string = obj.open_database()
+        cursor = connection_string.cursor()
+    # create a variable - query variable - use triple quotes
+        cursor.execute("select productid, productname, supplierid, unitprice from products")
+        rows = cursor.fetchall()
+        # for row in rows:
+        product_id = []
+        product_name = []
+        supplierid = []
+        price = []
+        for row in rows:
+            product_id.append(row.productid)
+            product_name.append(row.productname)
+            supplierid.append(row.supplierid)
+            price.append(row.unitprice)
+
+        df = pd.DataFrame()
+
+        df["product_id"] = product_id
+        df["product_name"] = product_name
+        df["supplierid"] = supplierid
+        df["price"] = price
+
+        print(df.head(len(product_id))) 
+```
+#### Homework
+
+- in terms of the homework - the objective was to write text to a file and then read from this file to write to another file, simultaneously 
+
+- in the code below, I constructed an OOP program that takes an input from a user and the in the following methods reads the message. 
+
+```python
+def readimage(seld):
+
+        with open(mike_tyson,'rb') as image_file: # reading it as bytes rb = read_bytes
+            image_string = image_file.read()
+            with open("file location.png","wb") as dest_image:
+                dest_image.write(image_string) # writing the top two lines into the bottom two lines 
 
 
-
-
----
-# Project notes
-My project has been through a couple of iterations but has a lot of room for improvement
-Currently, it is comprised of three files
-- My Databasecnxn file imports pyodbc and creates a class to establish a connection with the database 
-- I can improve on this by storing the sensitive information in a secret file in my gitignore to prevent the details from being shared publicly 
-Next I have a file called queries
-- I used instantiation to link the methods in my Open connection class with the method in my queries class
-- I hard coded the SQL command, but in the future, I will try to implement user inputs to drive the SQL queries
-Finally i have a 'main' or run file
-- I used the pillar of abstraction here to hide some of the details from plain sight. I like the simplicity of this file and I will continue using this framework for future iterations of my project
+```
+https://github.com/Spartabariallali/filehandling/blob/master/mike_tyson.jpg
