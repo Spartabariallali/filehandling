@@ -1,19 +1,19 @@
 ## Python Database Connections
 - create a python file that contains parameters which enable us to connect to the database
 ```python
-server = 'databases.spartaglobal.academy'
-database = 'Northwind'
-username = 'SA'
-password = 'Passw0rd2018' 
+server = '*************'
+database = '************'
+username = '************'
+password = '*************' 
 ```
-#### PYODBC module
-Pyodbc is a python library which helps connect to a database
--  in order to establish a connection between SQL python we need to import the pyodbc module and establish the parameters in the connection string
-- 
+### PYODBC module
+- Pyodbc is a python library which helps connect to a database
+-  In order to establish a connection between SQL python we need to import the pyodbc module and establish the parameters in the connection string
+
 ```python
 import pyodbc  
 ```
-## ODBC
+### ODBC
 - open database ___ which is for opening microsoft applications
 cursor is a control structure that allows us to control and manage rows data from a response. in the pyodbc instance it is used to manage our
 
@@ -32,10 +32,10 @@ class ConnectingToDataBase:
     def open_database(self):
 
         print("connecting to SQl server with ODBC driver")
-        server = 'databases.spartaglobal.academy'
-        database = 'Northwind'
-        username = 'SA'
-        password = 'Passw0rd2018'
+        server = '**********'
+        database = '**********'
+        username = '**********'
+        password = '**********'
         connection_string = ('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+password)
         connection_key = pyodbc.connect(connection_string, autocommit=True)
         print("connected {}".format(database))
